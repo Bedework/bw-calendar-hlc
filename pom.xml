@@ -1,0 +1,34 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.bedework</groupId>
+    <artifactId>bedework-parent</artifactId>
+    <version>200-SNAPSHOT</version>
+  </parent>
+
+  <groupId>org.bedework.bwhlc</groupId>
+  <artifactId>bw-calendar-hlc</artifactId>
+  <version>5.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Bedework: calendar high level client</name>
+  <description>Calendar high level client code for bedework</description>
+  <url>https://github.com/Bedework/bw-calendar-hlc</url>
+
+  <modules>
+    <module>bw-calendar-hlc-ro-api</module>
+    <module>bw-calendar-hlc-ro</module>
+    <module>bw-calendar-hlc-common</module>
+    <module>bw-calendar-hlc-rw</module>
+    <module>bw-calendar-hlc-rw-api</module>
+    <module>bw-calendar-hlc-admin</module>
+    <module>bw-calendar-hlc-admin-api</module>
+  </modules>
+
+  <scm>
+    <connection>scm:git:git@github.com:Bedework/bw-calendar-hlc.git</connection>
+    <developerConnection>scm:git:git@github.com:Bedework/bw-calendar-hlc.git</developerConnection>
+    <url>https://github.com/Bedework/bw-calendar-hlc</url>
+    <tag>HEAD</tag>
+  </scm>
+</project>
