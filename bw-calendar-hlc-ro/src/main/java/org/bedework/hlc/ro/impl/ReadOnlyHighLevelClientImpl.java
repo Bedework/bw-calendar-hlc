@@ -1,10 +1,12 @@
 package org.bedework.hlc.ro.impl;
 
+import org.bedework.base.response.GetEntitiesResponse;
 import org.bedework.base.response.GetEntityResponse;
 import org.bedework.calfacade.BwCalendar;
 import org.bedework.calfacade.BwGroup;
 import org.bedework.calfacade.BwPrincipal;
 import org.bedework.calfacade.svc.BwCalSuite;
+import org.bedework.calsvci.CalendarsI;
 import org.bedework.hlc.common.HighLevelClientImpl;
 import org.bedework.hlc.ro.ReadOnlyHighLevelClient;
 import org.bedework.llc.common.LowLevelClient;
@@ -13,6 +15,7 @@ import org.bedework.llc.ro.ReadOnlyLowLevelClient;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -33,6 +36,8 @@ public class ReadOnlyHighLevelClientImpl
 
   private static Collection<BwCalSuite> suites;
 
+  private final Set<String> collectionOpenState = new HashSet<>();
+
   public ReadOnlyHighLevelClientImpl(final LowLevelClient cl) {
     super(cl);
   }
@@ -46,7 +51,7 @@ public class ReadOnlyHighLevelClientImpl
    * ------------------------------------------------------------ */
 
   @Override
-  public Collection<BwGroup<?>> getAdminGroups()
+  public GetEntitiesResponse<BwGroup<?>> getAdminGroups()
   {
     return refreshAdminGroupInfo();
   }
@@ -69,12 +74,33 @@ public class ReadOnlyHighLevelClientImpl
     return null;
   }
 
-  protected Collection<BwGroup<?>> refreshAdminGroupInfo() {
+  @Override
+  public boolean getCollectionOpenState(final String path) {
+    return collectionOpenState.contains(path);
+  }
+
+  @Override
+  public void setCollectionOpenState(final String path,
+                                     final boolean open) {
+    if (open) {
+      collectionOpenState.add(path);
+    } else {
+      collectionOpenState.remove(path);
+    }
+  }
+
+  @Override
+  public CalendarsI.SynchStatusResponse getSynchStatus(
+          final BwCalendar val) {
+    return null;
+  }
+
+  protected GetEntitiesResponse<BwGroup<?>> refreshAdminGroupInfo() {
     final var res = adminGroupsInfo; // Save in case adminGroupsInfo set to null
     if ((res != null) &&
             (System.currentTimeMillis() < (lastAdminGroupsInfoRefresh +
                                                    adminGroupsInfoRefreshInterval))) {
-      return res;
+      return new GetEntitiesResponse<BwGroup<?>>().setEntities(res);
     }
 
     synchronized (adminGroupLocker) {
@@ -128,7 +154,8 @@ public class ReadOnlyHighLevelClientImpl
 
       lastAdminGroupsInfoRefresh = System.currentTimeMillis();
 
-      return adminGroupsInfo;
+      return new GetEntitiesResponse<BwGroup<?>>()
+              .setEntities(adminGroupsInfo);
     }
   }
 

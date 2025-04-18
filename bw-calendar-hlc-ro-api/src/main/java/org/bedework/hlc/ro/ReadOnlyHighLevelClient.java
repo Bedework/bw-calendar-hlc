@@ -1,25 +1,25 @@
 package org.bedework.hlc.ro;
 
+import org.bedework.base.response.GetEntitiesResponse;
 import org.bedework.base.response.GetEntityResponse;
 import org.bedework.calfacade.BwCalendar;
 import org.bedework.calfacade.BwGroup;
+import org.bedework.calsvci.CalendarsI;
 import org.bedework.hlc.common.HighLevelClient;
-
-import java.util.Collection;
 
 /** Provides high level operations on the calendar store.
  * The client may be operating in guest mode or as an
  * authenticated user.
  */
 public interface ReadOnlyHighLevelClient extends HighLevelClient {
-  /* ------------------------------------------------------------
+  /* -------------------------------------------------
    *                     Admin Groups
-   * ------------------------------------------------------------ */
+   * ------------------------------------------------- */
 
   /**
    * @return groups
    */
-  Collection<BwGroup<?>> getAdminGroups();
+  GetEntitiesResponse<BwGroup<?>> getAdminGroups();
 
   // ================== Collections ================
 
@@ -45,4 +45,24 @@ public interface ReadOnlyHighLevelClient extends HighLevelClient {
    * @return response with collection object or error.
    */
   GetEntityResponse<BwCalendar> getCollection(String path);
+
+  /**
+   * @param path of collection
+   * @return true if open
+   */
+  public boolean getCollectionOpenState(String path);
+
+  /**
+   * @param path of collection
+   * @param open true if open
+   */
+  public void setCollectionOpenState(String path,
+                                     boolean open);
+
+  /**
+   *
+   * @param val collection
+   * @return never null - requestStatus set for not an external subscription.
+   */
+  CalendarsI.SynchStatusResponse getSynchStatus(BwCalendar val);
 }
