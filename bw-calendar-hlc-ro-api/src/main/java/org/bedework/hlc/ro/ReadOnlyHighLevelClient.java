@@ -2,9 +2,9 @@ package org.bedework.hlc.ro;
 
 import org.bedework.base.response.GetEntitiesResponse;
 import org.bedework.base.response.GetEntityResponse;
-import org.bedework.calfacade.BwCalendar;
+import org.bedework.calfacade.BwCollection;
 import org.bedework.calfacade.BwGroup;
-import org.bedework.calsvci.CalendarsI;
+import org.bedework.calsvci.CollectionsI;
 import org.bedework.hlc.common.HighLevelClient;
 
 /** Provides high level operations on the calendar store.
@@ -32,19 +32,19 @@ public interface ReadOnlyHighLevelClient extends HighLevelClient {
    *
    * @return appropriate home collection
    */
-  GetEntityResponse<BwCalendar> getHomeCollection();
+  GetEntityResponse<BwCollection> getHomeCollection();
 
   /**
    *
    * @return the cloned root of the public collection tree.
    */
-  GetEntityResponse<BwCalendar> getPublicCollection();
+  GetEntityResponse<BwCollection> getPublicCollection();
 
   /**
    * @param path for collection
    * @return response with collection object or error.
    */
-  GetEntityResponse<BwCalendar> getCollection(String path);
+  GetEntityResponse<BwCollection> getCollection(String path);
 
   /**
    * @param path of collection
@@ -64,5 +64,5 @@ public interface ReadOnlyHighLevelClient extends HighLevelClient {
    * @param val collection
    * @return never null - requestStatus set for not an external subscription.
    */
-  CalendarsI.SynchStatusResponse getSynchStatus(BwCalendar val);
+  CollectionsI.SynchStatusResponse getSynchStatus(BwCollection val);
 }

@@ -2,11 +2,11 @@ package org.bedework.hlc.ro.impl;
 
 import org.bedework.base.response.GetEntitiesResponse;
 import org.bedework.base.response.GetEntityResponse;
-import org.bedework.calfacade.BwCalendar;
+import org.bedework.calfacade.BwCollection;
 import org.bedework.calfacade.BwGroup;
 import org.bedework.calfacade.BwPrincipal;
 import org.bedework.calfacade.svc.BwCalSuite;
-import org.bedework.calsvci.CalendarsI;
+import org.bedework.calsvci.CollectionsI;
 import org.bedework.hlc.common.HighLevelClientImpl;
 import org.bedework.hlc.ro.ReadOnlyHighLevelClient;
 import org.bedework.llc.common.LowLevelClient;
@@ -59,17 +59,17 @@ public class ReadOnlyHighLevelClientImpl
   // ================== Collections ================
 
   @Override
-  public GetEntityResponse<BwCalendar> getHomeCollection() {
+  public GetEntityResponse<BwCollection> getHomeCollection() {
     return null;
   }
 
   @Override
-  public GetEntityResponse<BwCalendar> getPublicCollection() {
+  public GetEntityResponse<BwCollection> getPublicCollection() {
     return null;
   }
 
   @Override
-  public GetEntityResponse<BwCalendar> getCollection(
+  public GetEntityResponse<BwCollection> getCollection(
           final String path) {
     return null;
   }
@@ -90,8 +90,8 @@ public class ReadOnlyHighLevelClientImpl
   }
 
   @Override
-  public CalendarsI.SynchStatusResponse getSynchStatus(
-          final BwCalendar val) {
+  public CollectionsI.SynchStatusResponse getSynchStatus(
+          final BwCollection val) {
     return null;
   }
 
