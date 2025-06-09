@@ -20,7 +20,6 @@
 package org.bedework.hlc.common;
 
 import org.bedework.base.response.GetEntityResponse;
-import org.bedework.util.servlet.MessageEmit;
 
 import java.io.Serializable;
 
@@ -37,8 +36,6 @@ public class EntityDates implements Serializable {
   protected boolean hour24;
 
   protected int minIncrement;
-
-  protected MessageEmit err;
 
   /** Used for generating labels
    */

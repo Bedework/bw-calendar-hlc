@@ -54,9 +54,9 @@ public class BwModuleState implements Serializable {
   private CalendarInfo calInfo;
   private EventDates eventDates;
 
-  /* ....................................................................
+  /* ............................................................
    *                       View period
-   * .................................................................... */
+   * ............................................................ */
 
   // ENUM
   private String selectionType = BedeworkDefs.selectionTypeView;
@@ -77,9 +77,9 @@ public class BwModuleState implements Serializable {
    */
   private TimeView curTimeView;
 
-  /* ....................................................................
+  /* ............................................................
    *                   Searches
-   * .................................................................... */
+   * ............................................................ */
 
   private String query;
 
