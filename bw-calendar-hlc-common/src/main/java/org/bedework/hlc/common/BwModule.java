@@ -254,10 +254,6 @@ public class BwModule implements Logged, Serializable {
                              final String requestedUser,
                              final boolean canSwitch,
                              final ConfigCommon conf) {
-    if (conf.getPublicAdmin()) {
-      throw new BedeworkException("Non-admin client called for admin app");
-    }
-
     final boolean readWrite = conf.getReadWrite();
     final boolean guestMode = !readWrite && conf.getGuestMode();
     String calSuiteName = null;
@@ -286,6 +282,10 @@ public class BwModule implements Logged, Serializable {
     /* Make some checks to see if this is an old - restarted session.
      */
     if (client != null) {
+      if (client.getPublicAdmin()) {
+        throw new BedeworkException("Non-admin client called for admin app");
+      }
+
       /* Already there and already opened */
       if (debug()) {
         debug("Client interface -- Obtained from session for user " +
