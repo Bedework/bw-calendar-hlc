@@ -37,6 +37,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import static org.bedework.util.dates.DateFormatter.icalDateTimeFormat;
+
 /** Class to format and provide segments of dates and times.
  *
  * <p>There are 3 different times available to us (though some or all may be
@@ -572,9 +574,9 @@ public class DateTimeFormatter
       if (tzIsLocal) {
         formatted = tzFormatted;
       } else {
-        final String localIso =
-                DateTimeUtil.isoDateTime(dt, Timezones.getDefaultTz());
-        formatted = new FormattedDate(dt, localIso, date.getDateType(),
+        formatted = new FormattedDate(dt,
+                                      icalDateTimeFormat.fromDate(dt),
+                                      date.getDateType(),
                                       Timezones.getDefaultTz());
       }
     } catch (final Throwable t) {

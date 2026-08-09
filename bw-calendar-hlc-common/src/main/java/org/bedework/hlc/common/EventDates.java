@@ -37,6 +37,7 @@ import org.bedework.util.timezones.DateTimeUtil;
 
 import static org.bedework.base.response.Response.Status.exists;
 import static org.bedework.base.response.Response.Status.validationError;
+import static org.bedework.util.dates.DateFormatter.icalDateTimeFormat;
 
 /** The dates and/or duration which define when an event happens. These are
  * stored in objects which allow manipulation of individual date and time
@@ -132,9 +133,7 @@ public class EventDates extends EntityDates {
    */
   public Response<?> setNewEvent(final BwEvent val) {
     try {
-      final java.util.Date now = new java.util.Date(System.currentTimeMillis());
-
-      getStartDate().setDateTime(DateTimeUtil.isoDateTime(now));
+      getStartDate().setDateTime(icalDateTimeFormat.fromDate());
 
       duration = DurationBean.makeOneHour();
 

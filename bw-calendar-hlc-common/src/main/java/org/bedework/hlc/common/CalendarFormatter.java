@@ -21,7 +21,6 @@ package org.bedework.hlc.common;
 
 import org.bedework.base.exc.BedeworkException;
 import org.bedework.calfacade.locale.BwLocale;
-import org.bedework.util.timezones.DateTimeUtil;
 import org.bedework.util.timezones.Timezones;
 import org.bedework.util.timezones.TimezonesException;
 
@@ -282,24 +281,6 @@ public class CalendarFormatter implements Serializable {
         throw new BedeworkException(tze);
       }
     }
-  }
-
-  /**  Get an ISO String representation of the date
-   *
-   * @return String        ISO representation of the date
-   *            represented by this object.
-   */
-  public String getISODateString() {
-    return DateTimeUtil.isoDate(getTime());
-  }
-
-  /**  Get an ISO String representation of the date/time
-   *
-   * @return String        ISO representation of the date/time
-   *            represented by this object.
-   */
-  public String getISODateTimeString() {
-    return DateTimeUtil.isoDateTime(getTime());
   }
 
   /**  Get a short String representation of the date

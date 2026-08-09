@@ -34,7 +34,6 @@ import org.bedework.hlc.common.EventFormatter;
 import org.bedework.util.calendar.IcalDefs;
 import org.bedework.util.logging.BwLogger;
 import org.bedework.util.logging.Logged;
-import org.bedework.util.timezones.DateTimeUtil;
 import org.bedework.util.timezones.Timezones;
 import org.bedework.util.timezones.TimezonesException;
 
@@ -48,7 +47,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.bedework.util.timezones.DateTimeUtil.isoDate;
+import static org.bedework.util.dates.DateFormatter.icalDateFormat;
+import static org.bedework.util.dates.DateFormatter.icalDateTimeFormat;
 
 /** This class represents a view of the calendar from a startDate to an
  * endDate. The getTimePeriodInfo method always returns a tree structure
@@ -115,7 +115,7 @@ public class TimeView implements Logged, Serializable {
      *            represented by this object.
      */
     public String getDateTimeString() {
-      return DateTimeUtil.isoDateTime(getTime());
+      return icalDateTimeFormat.fromDate(getTime());
     }
 
     /**  Get date digits
@@ -123,7 +123,7 @@ public class TimeView implements Logged, Serializable {
      * @return String
      */
     public String getDateDigits() {
-      return isoDate(getTime());
+      return icalDateFormat.fromDate(getTime());
     }
 
     /**  Get full date
@@ -364,7 +364,7 @@ public class TimeView implements Logged, Serializable {
    */
   public Collection<EventFormatter> getDaysEvents(final Calendar date) {
     final ArrayList<EventFormatter> al = new ArrayList<>();
-    final var dtAsString = isoDate(date.getTime());
+    final var dtAsString = icalDateFormat.fromDate(date.getTime());
 
     //BwDateTime startDt = getBwDate(date.getDateDigits());
     //BwDateTime endDt = startDt.getNextDay();
@@ -397,7 +397,7 @@ public class TimeView implements Logged, Serializable {
      * of todos with no start date. These should only appear in the current day,
      * i.e today
      */
-    final boolean today = dtAsString.equals(isoDate());
+    final boolean today = dtAsString.equals(icalDateFormat.fromDate());
 
     for (final EventFormatter ef: events.values()) {
       final EventInfo ei = ef.getEventInfo();
